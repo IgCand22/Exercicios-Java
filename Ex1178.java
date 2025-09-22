@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Ex1178 {
     private static class Nodo {
-        public float elemento;
+        public double elemento;
         public Nodo proximo;
 
-        public Nodo(float elemento) {
+        public Nodo(double elemento) {
             this.elemento = elemento;
             this.proximo = null;
         }
@@ -21,7 +21,7 @@ public class Ex1178 {
         this.n_elementos = 0;
     }
 
-    public float divisaoRecursiva(float valor){
+    public float divisaoRecursiva(double valor){
         if (valor == 0) {
             insereFinal(valor);
             return 0;
@@ -30,7 +30,7 @@ public class Ex1178 {
         return divisaoRecursiva(valor/2);
     }
 
-    public void insereFinal(float elemento) {
+    public void insereFinal(double elemento) {
         Nodo novoNodo = new Nodo(elemento);
         if (ultimo == null) {
             primeiro = novoNodo;
@@ -56,7 +56,7 @@ public class Ex1178 {
     public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
     Ex1178 n =  new Ex1178();
-    n.divisaoRecursiva(scan.nextFloat());
+    n.divisaoRecursiva(scan.nextDouble());
     n.imprimirLista();
     }
 }
