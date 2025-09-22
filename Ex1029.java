@@ -2,10 +2,16 @@ import java.util.Scanner;
 
 public class Ex1029 {
     public static class FibonnaciRecursivo{
-        private int valorCalculado;
+        public int valorCalculado;
+        public int resultado;
         private int calls;
 
-       public int getCalls(){
+        public FibonnaciRecursivo(int valorCalculado){
+            this.valorCalculado = valorCalculado;
+            this.resultado = seqFib(valorCalculado);
+        }
+
+        public int getCalls(){
             return calls-1;
         }
 
@@ -17,18 +23,17 @@ public class Ex1029 {
                 return 1;
             }
             return seqFib(valor-1) + seqFib(valor-2);
-
         }
     }
 
     public static class Vetor{
-        int[] vetor;
+        FibonnaciRecursivo[] vetor;
         int capacidade;
         int n_elementos;
 
         public Vetor(int capacidade){
             this.capacidade = capacidade;
-            this.vetor = new int[capacidade];
+            this.vetor = new FibonnaciRecursivo[capacidade];
             n_elementos = 0;
         }
 
@@ -36,7 +41,7 @@ public class Ex1029 {
             return n_elementos == capacidade;
         }
 
-        public void addElementoFinal(int elemento){
+        public void addElementoFinal(FibonnaciRecursivo elemento){
             if (vetorCheio()){
                 System.out.println("Vetor está na capacidade máxima");
                 return;
@@ -46,8 +51,8 @@ public class Ex1029 {
         }
 
         public void imprimirVetor(){
-            for(int i = 0; i < capacidade/3; i++){
-                System.out.println("fib(" + vetor[i] + ")" + " " + vetor[i+1] + " " + "calls" + vetor[i+2]);
+            for(int i = 0; i < capacidade; i++){
+                System.out.println("fib(" + vetor[i].valorCalculado + ") = " + vetor[i].getCalls() + " " + "calls = " +  vetor[i].resultado );
             }
         }
 
@@ -56,13 +61,9 @@ public class Ex1029 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int qtdNum = scan.nextInt();
-        Vetor vetor = new Vetor(qtdNum*3);
-        for (int i = 0; i < qtdNum; i++) {
-            FibonnaciRecursivo fib = new FibonnaciRecursivo();
-            int numero = scan.nextInt();
-            vetor.addElementoFinal(numero);
-            vetor.addElementoFinal(fib.seqFib(numero));
-            vetor.addElementoFinal(fib.getCalls());
+        Vetor vetor = new Vetor(qtdNum);
+        for (int i = 0; i < qtdNum; i++){
+            vetor.addElementoFinal(new FibonnaciRecursivo(scan.nextInt()));
         }
         vetor.imprimirVetor();
     }
